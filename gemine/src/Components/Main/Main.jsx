@@ -11,6 +11,8 @@ import { TfiGallery } from "react-icons/tfi";
 import { FaMicrophone } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 
+const API_URL = "https://google-gemini-ab5g.onrender.com";
+
 const Main = () => {
   const [prompt, setPrompt] = useState("");
   const [aiResponse, setAiResponse] = useState("");
@@ -22,7 +24,7 @@ const Main = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.post("/api/generate-ai-response", {
+      const res = await axios.post(`/api/generate-ai-response`, {
         prompt,
       });
 
