@@ -1,22 +1,21 @@
-// server.js (or your main backend file)
 import express from "express";
 import bodyParser from "body-parser";
 import { GoogleGenAI } from "@google/genai";
-import cors from "cors"; // For handling Cross-Origin Requests (important for local development)
+import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 const app = express();
-// Choose a port for your backend
+
 dotenv.config();
-app.use(cors()); // Enable CORS for local development
-app.use(bodyParser.json()); // Middleware to parse JSON request bodies
+app.use(cors());
+app.use(bodyParser.json());
 app.use(morgan("dev"));
 const ai = new GoogleGenAI({ apiKey: process.env.REACT_APP_GEMINI_API_KEY });
 const modelName = "gemini-2.0-flash";
 
 app.post("/api/generate-ai-response", async (req, res) => {
   try {
-    const userPrompt = req.body.prompt; // Get the prompt from the request body
+    const userPrompt = req.body.prompt;
 
     if (!userPrompt) {
       return res.status(400).json({ error: "Prompt is required" });
@@ -27,7 +26,7 @@ app.post("/api/generate-ai-response", async (req, res) => {
       contents: userPrompt,
     });
 
-    res.json({ response: response.text }); // Send the AI response back as JSON
+    res.json({ response: response.text });
   } catch (error) {
     console.error("Error generating AI response:", error);
     res.status(500).json({ error: "Failed to generate AI response" });

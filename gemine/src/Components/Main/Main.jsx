@@ -23,12 +23,14 @@ const Main = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
     try {
       const res = await axios.post(`${API_URL}/api/generate-ai-response`, {
         prompt,
       });
 
       setAiResponse(res.data.response);
+      setPrompt("");
     } catch (error) {
       setError(error.message);
       setAiResponse("");
@@ -40,17 +42,22 @@ const Main = () => {
   return (
     <>
       <div className="main">
-        <div className="nav">
+        <div className="nav ">
           <p>Gemini</p>
           <FaRegUserCircle size={20} />
         </div>
         <div className="main-container">
-          <div className="greet">
-            <div>
-              <span>Hello,Prem</span>
-              <p>How can i Help You today</p>
+          {aiResponse ? (
+            <></>
+          ) : (
+            <div className="greet">
+              <div>
+                <span>Hello,Prem</span>
+                <p>How can i Help You today</p>
+              </div>
             </div>
-          </div>
+          )}
+
           {aiResponse ? (
             <></>
           ) : (
@@ -89,43 +96,59 @@ const Main = () => {
           )}
 
           {error && <p style={{ color: "red" }}>Error: {error}</p>}
-          {aiResponse && (
-            <div className="responce-box">
-              <ReactMarkdown>{aiResponse}</ReactMarkdown>
-            </div>
+          {!aiResponse ? (
+            loading && (
+              <>
+                <div className="d-flex justify-content-center">
+                  <div class="spinner-grow " role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </>
+            )
+          ) : (
+            <>
+              <div className="responce-box">
+                <ReactMarkdown>{aiResponse}</ReactMarkdown>
+              </div>
+            </>
           )}
-          <div className="main-bottom ">
-            <div className="search-box position-fixed bottom-0 disabled ">
-              <input
-                type="text"
-                onChange={(e) => setPrompt(e.target.value)}
-                value={prompt}
-                placeholder="Enter a prompt Here..."
-              />
+          <form onSubmit={handleSubmit} className="forms">
+            <div className="main-bottom">
+              <div className="search-box position-fixed bottom-0">
+                <input
+                  type="text"
+                  onChange={(e) => setPrompt(e.target.value)}
+                  value={prompt}
+                  placeholder="Ask Gamini.."
+                  required
+                />
 
-              <div className="search-box-icon">
-                <TfiGallery />
-                <FaMicrophone />
-                {loading ? (
-                  <>
-                    <div className="spinner-border text-primary" role="status">
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <IoSend onClick={handleSubmit} />
-                  </>
-                )}
+                <div className="search-box-icon">
+                  {loading ? (
+                    <>
+                      <div
+                        className="spinner-border text-primary"
+                        role="status"
+                      >
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        type="submit"
+                        className="border-0 bg-transparent "
+                        style={{ marginTop: "-5px" }}
+                      >
+                        <IoSend />
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="bottom-info">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
-              nemo!
-            </p>
-          </div>
+          </form>
         </div>
       </div>
     </>
