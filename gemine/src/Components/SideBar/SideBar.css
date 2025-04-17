@@ -1,0 +1,63 @@
+.sidebar {
+  min-height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f0f4f9;
+  padding: 1rem 1rem;
+}
+.top,
+.bottom {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar .newChat {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  background-color: #e6eaf1;
+  font-size: 0.7rem;
+  color: gray;
+  border-radius: 1rem 1rem;
+  cursor: pointer;
+}
+
+.sidebar .resent {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .resent-title {
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.sidebar .resent-entry {
+  display: flex;
+  align-items: start;
+  gap: 0.5rem;
+  padding: 1rem;
+  padding-right: 1.2rem;
+  border-radius: 1.5rem;
+  color: #282828;
+  cursor: pointer;
+}
+
+.sidebar .resent-entry:hover {
+  background-color: #e2e6eb;
+}
+
+.sidebar .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .bottom-item {
+  padding-right: 10px;
+  cursor: pointer;
+}
