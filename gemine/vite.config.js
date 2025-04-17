@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "https://google-gemini-ab5g.onrender.com/",
-        secure: false,
+        secure: true,
       },
     },
   },
