@@ -24,7 +24,7 @@ const Main = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.post("/api/generate-ai-response", {
+      const res = await axios.post(`${API_URL}/api/generate-ai-response`, {
         prompt,
       });
 
